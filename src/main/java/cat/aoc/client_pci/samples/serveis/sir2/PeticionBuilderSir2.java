@@ -35,7 +35,7 @@ public class PeticionBuilderSir2 extends PeticionBuilderFromProperties<OperacioS
         fichero.setNombreFichero("sample.pdf");
         fichero.setId("1234");
         fichero.setVia("Salida");
-        javax.activation.DataSource ds = new javax.activation.FileDataSource("src\\main\\resources\\examples\\example.pdf");
+        javax.activation.DataSource ds = new javax.activation.FileDataSource("src/main/resources/examples/example.pdf");
         fichero.setContenido(new javax.activation.DataHandler(ds));
         Ficheros ficheros = new Ficheros();
         ficheros.getFichero().add(fichero);

@@ -4,6 +4,7 @@ import cat.aoc.client_pci.api.exceptions.ClientException;
 import cat.aoc.client_pci.api.model.Cluster;
 import cat.aoc.client_pci.api.model.Entorn;
 import cat.aoc.client_pci.api.model.Frontal;
+import cat.aoc.client_pci.api.soap.KeystoreProperties;
 import cat.aoc.client_pci.api.soap.LoggerInterceptor;
 import cat.aoc.client_pci.api.soap.SignatureInterceptor;
 import cat.aoc.client_pci.api.soap.SoapMtomClient;
@@ -25,6 +26,14 @@ import java.util.Arrays;
 import java.util.Properties;
 import java.util.stream.Stream;
 
+/**
+ * Client SOAP genèric per consumir els serveis de la PCI (Plataforma de
+ * Col·laboració Interadministrativa) de l'AOC.
+ *
+ * <p>Encapsula la construcció del client de Spring WS, la signatura de les
+ * peticions (WS-Security / XMLDSIG) i, opcionalment, l'enviament amb MTOM.
+ * Normalment s'obté a través de {@link cat.aoc.client_pci.api.clients.Serveis}.</p>
+ */
 @Slf4j
 public class ClientPCI {
     private static final String[] PACKAGES = {
@@ -65,14 +74,14 @@ public class ClientPCI {
 
     public void configureMtom(Properties keystore) {
         try {
-            String p12FilePath = keystore.getProperty("org.apache.ws.security.crypto.merlin.keystore.file");
-            String p12Password = keystore.getProperty("org.apache.ws.security.crypto.merlin.keystore.password");
+            String p12FilePath = keystore.getProperty(KeystoreProperties.FILE);
+            String p12Password = keystore.getProperty(KeystoreProperties.PASSWORD);
             CloseableHttpClient httpClient = createHttpClient(p12FilePath, p12Password);
             HttpComponentsMessageSender messageSender = new HttpComponentsMessageSender();
             messageSender.setHttpClient(httpClient);
             client.getWebServiceTemplate().setMessageSender(messageSender);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("No s'ha pogut configurar MTOM", e);
         }
     }
 
@@ -86,7 +95,7 @@ public class ClientPCI {
                     new LoggerInterceptor(client.getUnmarshaller())
             });
         } catch (ClientException e) {
-            e.printStackTrace();
+            log.error("No s'han pogut configurar els interceptors", e);
         }
     }
 
@@ -99,6 +108,13 @@ public class ClientPCI {
                 .build();
     }
 
+    /**
+     * Envia una petició signada al servei i en retorna la resposta.
+     *
+     * @param peticion petició construïda amb un {@code PeticionBuilder}
+     * @return la resposta del servei
+     * @throws ClientException si es produeix un error en construir l'endpoint o en l'enviament
+     */
     public Respuesta send(Peticion peticion) throws ClientException {
         Procesa procesa = new Procesa();
         procesa.setPeticion(peticion);

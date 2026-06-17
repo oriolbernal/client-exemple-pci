@@ -44,7 +44,7 @@ public class PeticionBuilderEnotum extends PeticionBuilderFromProperties<Operaci
         fichero.setNombreFichero("sample.pdf");
         fichero.setId("1234");
         fichero.setVia("Salida");
-        FileDataSource ds = new FileDataSource("src\\main\\resources\\examples\\example.pdf");
+        FileDataSource ds = new FileDataSource("src/main/resources/examples/example.pdf");
         fichero.setContenido(new DataHandler(ds)); // XOP reference
         Ficheros ficheros = new Ficheros();
         ficheros.getFichero().add(fichero);

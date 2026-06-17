@@ -12,6 +12,13 @@ import lombok.Getter;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * Catàleg dels serveis de la PCI disponibles i punt d'entrada per obtenir-ne el client.
+ *
+ * <p>Cada constant associa el servei amb el seu clúster i amb els paquets JAXB
+ * generats a partir dels XSD del servei. Useu {@link #getClient} per obtenir un
+ * {@link ClientPCI} configurat per a l'entorn i el frontal desitjats.</p>
+ */
 @Getter
 public enum Serveis {
     BOE(Cluster.APP, "generated.serveis.boe"),
@@ -59,6 +66,15 @@ public enum Serveis {
         this.packages = packages;
     }
 
+    /**
+     * Construeix un client configurat per a aquest servei.
+     *
+     * @param entorn       entorn de destinació (DEV, PRE o PRO)
+     * @param frontal      frontal del servei (síncron o asíncron)
+     * @param keystorePath ruta al fitxer {@code keystore.properties} amb la configuració del certificat
+     * @return el client llest per enviar peticions
+     * @throws IOException si no es pot llegir la configuració del magatzem de claus
+     */
     public ClientPCI getClient(Entorn entorn, Frontal frontal, String keystorePath) throws IOException {
         Properties properties = PropertiesReader.load(keystorePath);
         switch (this) {

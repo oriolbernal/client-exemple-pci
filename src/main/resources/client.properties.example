@@ -1,0 +1,22 @@
+# =============================================================================
+#  Dades de client per construir les peticions PCI (part de negoci).
+#  Copieu aquest fitxer a 'client.properties' i ompliu-lo amb les vostres dades.
+#    cp client.properties.example client.properties
+# =============================================================================
+
+# Codi INE10 de l'ens requeridor (assignat per l'AOC en donar-vos d'alta).
+client.codi_ens=9821920002
+
+# Emissor de la petició.
+client.emisor.nif=Q0801175A
+client.emisor.nombre=CAOC
+
+# Sol·licitant de la transmissió.
+client.solicitante.identificador=9821920002
+client.solicitante.nombre=Ajuntament
+# Base legal del consentiment (p. ex. "Ley" o "Si").
+client.solicitante.consentimiento=Ley
+
+# Funcionari que realitza la consulta.
+client.funcionario.nif=00000000T
+client.funcionario.nombre=Funcionari

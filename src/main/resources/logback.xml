@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Configuració de logging del client d'exemple PCI.
+  El nivell DEBUG de 'cat.aoc.client_pci' mostra la petició i la resposta SOAP
+  (vegeu LoggerInterceptor), molt útil per entendre el format dels missatges.
+-->
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Traça detallada del client (peticions/respostes SOAP) -->
+    <logger name="cat.aoc.client_pci" level="DEBUG"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>

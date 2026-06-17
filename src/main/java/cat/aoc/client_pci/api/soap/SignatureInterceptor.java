@@ -23,8 +23,8 @@ public class SignatureInterceptor extends Wss4jSecurityInterceptor {
 
     public void createSecurityInterceptor(Properties properties) throws ClientException {
         setSecurementActions(SECURITY_ACTIONS);
-        setSecurementUsername(properties.getProperty("org.apache.ws.security.crypto.merlin.keystore.alias"));
-        setSecurementPassword(properties.getProperty("org.apache.ws.security.crypto.merlin.keystore.password"));
+        setSecurementUsername(properties.getProperty(KeystoreProperties.ALIAS));
+        setSecurementPassword(properties.getProperty(KeystoreProperties.PASSWORD));
         setSecurementSignatureCrypto(createCrypto(properties));
         setSecurementSignatureKeyIdentifier(KEY_IDENTIFIER);
         setSecurementSignatureAlgorithm(SIGNATURE_ALGORITHM);

@@ -89,8 +89,7 @@ public class LoggerInterceptor implements ClientInterceptor {
         try {
             runnable.run();
         } catch (WebServiceClientException e) {
-            log.warn("Could not log soap message: " + e.getMessage());
-            e.printStackTrace();
+            log.warn("No s'ha pogut registrar el missatge SOAP", e);
         }
         log.info("#######################################################################################");
     }

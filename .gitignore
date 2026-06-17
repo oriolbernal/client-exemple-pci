@@ -6,6 +6,13 @@
 # JAXB generated sources (created by the 'jaxb' gradle task)
 /src/main/java/generated/
 
+# Secrets: certificats i configuració real (no versionar mai)
+*.p12
+*.pfx
+*.jks
+/src/main/resources/client.properties
+/src/main/resources/keystore.properties
+
 ### IntelliJ IDEA ###
 .idea
 *.iws

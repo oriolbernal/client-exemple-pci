@@ -1,9 +1,7 @@
 package cat.aoc.client_pci.samples.serveis.etauler;
 
+import cat.aoc.client_pci.utils.XmlDates;
 import generated.serveis.etauler.*;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
 
 final class PeticionBuilderEtaulerPublicar {
 
@@ -20,12 +18,8 @@ final class PeticionBuilderEtaulerPublicar {
         info.setDescripcio("Publicació PRE Etauler - PROVA 1");
         info.setIdioma(TIdioma.CA);
         edicte.getInformacio().add(info);
-        try {
-            edicte.setDataIniciPublicacio(DatatypeFactory.newInstance().newXMLGregorianCalendar("2023-03-31"));
-            edicte.setDataFiPublicacio(DatatypeFactory.newInstance().newXMLGregorianCalendar("2023-05-31"));
-        } catch (DatatypeConfigurationException e) {
-            e.printStackTrace();
-        }
+        edicte.setDataIniciPublicacio(XmlDates.of("2023-03-31"));
+        edicte.setDataFiPublicacio(XmlDates.of("2023-05-31"));
         edicte.setDestacat(false);
         Diligencia diligencia = new Diligencia();
         diligencia.setIdioma(TIdioma.CA);
