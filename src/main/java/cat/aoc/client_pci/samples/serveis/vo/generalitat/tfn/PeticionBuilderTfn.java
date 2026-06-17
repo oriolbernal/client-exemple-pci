@@ -13,12 +13,16 @@ public class PeticionBuilderTfn extends PeticionBuilderFromProperties<OperacioTf
 
     @Override
     protected Object[] getDatosEspecificos(OperacioTfn operacio) {
-        return switch (operacio) {
-            case TFN_DADESCOMPLETES -> new Object[]{
-                    buildPeticioDadesCompletes()
-            };
-            case TFN_DADESCOMPLETES_DIS, TFN_VIGENCIA -> new Object[]{};
-        };
+        switch (operacio) {
+            case TFN_DADESCOMPLETES:
+                return new Object[]{
+                        buildPeticioDadesCompletes()
+                };
+            case TFN_DADESCOMPLETES_DIS:
+            case TFN_VIGENCIA:
+            default:
+                return new Object[]{};
+        }
     }
 
     private PeticioDadesCompletes buildPeticioDadesCompletes() {

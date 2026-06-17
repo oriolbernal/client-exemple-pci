@@ -11,12 +11,14 @@ public class PeticionBuilderSepe extends PeticionBuilderFromProperties<OperacioS
 
     @Override
     protected Object[] getDatosEspecificos(OperacioSepe operacio) {
-        return switch (operacio) {
-            case VERIF_DADES_ATUR,
-                    VERIF_IMPORTS_ACTUALS,
-                    VERIF_IMPORTS_PERIODE -> new Object[]{
-            };
-        };
+        switch (operacio) {
+            case VERIF_DADES_ATUR:
+            case VERIF_IMPORTS_ACTUALS:
+            case VERIF_IMPORTS_PERIODE:
+            default:
+                return new Object[]{
+                };
+        }
     }
 
 }

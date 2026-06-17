@@ -32,12 +32,17 @@ public class ProxyClientCadastre extends ClientPCI {
     @Override
     public Respuesta send(Peticion peticion) throws ClientException {
         String modalitat = peticion.getAtributos().getCodigoCertificado();
-        return switch (modalitat) {
-            case "CERTIFICACIO_TITULARITAT" -> clientCertificacio.send(peticion);
-            case "DADES_CADASTRALS"-> clientDades.send(peticion);
-            case "DESCRIPTIVA_GRAFICA" -> clientGrafica.send(peticion);
-            case "DOCUMENT_CSV" -> clientCsv.send(peticion);
-            default -> throw new ClientException("Modalitat no definida: " + modalitat);
-        };
+        switch (modalitat) {
+            case "CERTIFICACIO_TITULARITAT":
+                return clientCertificacio.send(peticion);
+            case "DADES_CADASTRALS":
+                return clientDades.send(peticion);
+            case "DESCRIPTIVA_GRAFICA":
+                return clientGrafica.send(peticion);
+            case "DOCUMENT_CSV":
+                return clientCsv.send(peticion);
+            default:
+                throw new ClientException("Modalitat no definida: " + modalitat);
+        }
     }
 }

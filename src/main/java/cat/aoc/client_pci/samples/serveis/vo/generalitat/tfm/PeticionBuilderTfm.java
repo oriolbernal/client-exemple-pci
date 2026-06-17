@@ -14,17 +14,21 @@ public class PeticionBuilderTfm extends PeticionBuilderFromProperties<OperacioTf
 
     @Override
     protected Object[] getDatosEspecificos(OperacioTfm operacio) {
-        return switch (operacio) {
-            case TFM_DADESCOMPLETES -> new Object[]{
-                    buildPeticioDadesCompletes()
-            };
-            case TFM_VIGENCIA -> new Object[]{
-                    buildPeticioConsultaVigencia()
-            };
-            case TFM_DADESCOMPLETES_DIS,
-                    TFM_DADESCOMPLETES_MASSIU,
-                    TFM_DADESCOMPLETES_DIS_MASSIU -> new Object[]{};
-        };
+        switch (operacio) {
+            case TFM_DADESCOMPLETES:
+                return new Object[]{
+                        buildPeticioDadesCompletes()
+                };
+            case TFM_VIGENCIA:
+                return new Object[]{
+                        buildPeticioConsultaVigencia()
+                };
+            case TFM_DADESCOMPLETES_DIS:
+            case TFM_DADESCOMPLETES_MASSIU:
+            case TFM_DADESCOMPLETES_DIS_MASSIU:
+            default:
+                return new Object[]{};
+        }
     }
 
     private PeticioDadesCompletes buildPeticioDadesCompletes() {

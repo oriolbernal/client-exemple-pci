@@ -12,17 +12,20 @@ public class PeticionBuilderDgt extends PeticionBuilderFromProperties<OperacioDg
 
     @Override
     protected Object[] getDatosEspecificos(OperacioDgt operacio) {
-        return switch (operacio) {
-            case DGT_DADES_VEHICLE -> new Object[]{
-                    buildPeticioConsultaVehicle()
-            };
-            case    DGT_DADES_VEHICLE_SANCIONS,
-                    DGT_PERMISOS_CONDUCTOR,
-                    DGT_TITULAR_VIA,
-                    DGT_SANCIONS_CONDUCTOR,
-                    DGT_VEHICLES_CONDUCTOR,
-                    DGT_DISTINTIU_MEDIAMBIENTAL -> new Object[]{};
-        };
+        switch (operacio) {
+            case DGT_DADES_VEHICLE:
+                return new Object[]{
+                        buildPeticioConsultaVehicle()
+                };
+            case DGT_DADES_VEHICLE_SANCIONS:
+            case DGT_PERMISOS_CONDUCTOR:
+            case DGT_TITULAR_VIA:
+            case DGT_SANCIONS_CONDUCTOR:
+            case DGT_VEHICLES_CONDUCTOR:
+            case DGT_DISTINTIU_MEDIAMBIENTAL:
+            default:
+                return new Object[]{};
+        }
     }
 
     private PeticioConsultaVehicle buildPeticioConsultaVehicle() {

@@ -33,21 +33,24 @@ public class ProxyClientPadro extends ClientPCI {
     @Override
     public Respuesta send(Peticion peticion) throws ClientException {
         String modalitat = peticion.getAtributos().getCodigoCertificado();
-        return switch (modalitat) {
-            case "TITULAR",
-                    "TITULAR_IDESCAT",
-                    "CERCA_TITULAR",
-                    "TITULAR_PROPI",
-                    "TITULAR_PDF",
-                    "RESIDENT",
-                    "MUNICIPI_RESIDENCIA",
-                    "RESIDENT_MUNICIPI" -> clientEmpadronamiento.send(peticion);
-            case "CONVIVENTS",
-                    "NUMERO_CONVIVENTS",
-                    "CONVIVENTS_PROPI",
-                    "CONVIVENTS_PDF",
-                    "COMPROVACIO_CONVIVENTS" -> clientConvivencia.send(peticion);
-            default -> throw new ClientException("Modalitat no definida: " + modalitat);
-        };
+        switch (modalitat) {
+            case "TITULAR":
+            case "TITULAR_IDESCAT":
+            case "CERCA_TITULAR":
+            case "TITULAR_PROPI":
+            case "TITULAR_PDF":
+            case "RESIDENT":
+            case "MUNICIPI_RESIDENCIA":
+            case "RESIDENT_MUNICIPI":
+                return clientEmpadronamiento.send(peticion);
+            case "CONVIVENTS":
+            case "NUMERO_CONVIVENTS":
+            case "CONVIVENTS_PROPI":
+            case "CONVIVENTS_PDF":
+            case "COMPROVACIO_CONVIVENTS":
+                return clientConvivencia.send(peticion);
+            default:
+                throw new ClientException("Modalitat no definida: " + modalitat);
+        }
     }
 }

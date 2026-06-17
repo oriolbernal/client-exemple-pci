@@ -21,12 +21,14 @@ public class PeticionBuilderMepsyd extends PeticionBuilderFromProperties<Operaci
 
     @Override
     protected Object[] getDatosEspecificos(OperacioMepsyd operacio) {
-        return switch (operacio) {
-            case TITOLS_UNIVERSITARIS,
-                    TITOLS_NO_UNIVERSITARIS,
-                    TITOLS_UNIVERSITARIS_LLISTAT,
-                    TITOLS_NO_UNIVERSITARIS_LLISTAT -> new Object[]{};
-        };
+        switch (operacio) {
+            case TITOLS_UNIVERSITARIS:
+            case TITOLS_NO_UNIVERSITARIS:
+            case TITOLS_UNIVERSITARIS_LLISTAT:
+            case TITOLS_NO_UNIVERSITARIS_LLISTAT:
+            default:
+                return new Object[]{};
+        }
     }
 
     private static Titular getTitular() {

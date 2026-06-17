@@ -12,13 +12,16 @@ public class PeticionBuilderIgae extends PeticionBuilderFromProperties<OperacioI
 
     @Override
     protected Object[] getDatosEspecificos(OperacioIgae operacio) {
-        return switch (operacio) {
-            case IGAE_INHABILITACIONS -> new Object[]{
-                    buildPeticioConsultaInhabilitacions()
-            };
-            case    IGAE_MINIMIS,
-                    IGAE_CONCESSIONS -> new Object[]{};
-        };
+        switch (operacio) {
+            case IGAE_INHABILITACIONS:
+                return new Object[]{
+                        buildPeticioConsultaInhabilitacions()
+                };
+            case IGAE_MINIMIS:
+            case IGAE_CONCESSIONS:
+            default:
+                return new Object[]{};
+        }
     }
 
     private PeticioConsultaInhabilitacions buildPeticioConsultaInhabilitacions() {

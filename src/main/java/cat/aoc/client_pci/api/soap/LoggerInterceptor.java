@@ -28,7 +28,7 @@ public class LoggerInterceptor implements ClientInterceptor {
             try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
                 logRequest(messageContext);
                 messageContext.getRequest().writeTo(buffer);
-                String payload = buffer.toString(StandardCharsets.UTF_8);
+                String payload = buffer.toString(StandardCharsets.UTF_8.name());
                 log.info("Request:");
                 log.info(payload);
             } catch (Exception e) {
@@ -54,7 +54,7 @@ public class LoggerInterceptor implements ClientInterceptor {
         logSoapMessage("RECEIVED INFO", () -> {
             try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
                 messageContext.getResponse().writeTo(buffer);
-                String payload = buffer.toString(StandardCharsets.UTF_8);
+                String payload = buffer.toString(StandardCharsets.UTF_8.name());
                 log.info("Response:");
                 log.info(payload);
             } catch (IOException e) {
@@ -69,7 +69,7 @@ public class LoggerInterceptor implements ClientInterceptor {
         logSoapMessage("RECEIVED FAULT", () -> {
             try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
                 messageContext.getResponse().writeTo(buffer);
-                String payload = buffer.toString(StandardCharsets.UTF_8);
+                String payload = buffer.toString(StandardCharsets.UTF_8.name());
                 log.info("Fault:");
                 log.info(payload);
             } catch (IOException e) {

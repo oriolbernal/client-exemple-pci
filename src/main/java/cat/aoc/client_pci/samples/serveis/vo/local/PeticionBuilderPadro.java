@@ -14,16 +14,29 @@ public class PeticionBuilderPadro extends PeticionBuilderFromProperties<Operacio
 
     @Override
     protected Object[] getDatosEspecificos(OperacioPadro operacio) {
-        return switch (operacio) {
-            case CONVIVENTS -> new Object[]{
-                    buildPeticionDatosConvivientes()
-            };
-            case TITULAR -> new Object[]{
-                    buildPeticionDatosTitular()
-            };
-            case RESIDENT, MUNICIPI_RESIDENCIA, RESIDENT_MUNICIPI, NUMERO_CONVIVENTS, COMPROVACIO_CONVIVENTS, TITULAR_PROPI, CONVIVENTS_PROPI, TITULAR_PDF, CONVIVENTS_PDF, TITULAR_IDESCAT, CERCA_TITULAR ->
-                    new Object[]{};
-        };
+        switch (operacio) {
+            case CONVIVENTS:
+                return new Object[]{
+                        buildPeticionDatosConvivientes()
+                };
+            case TITULAR:
+                return new Object[]{
+                        buildPeticionDatosTitular()
+                };
+            case RESIDENT:
+            case MUNICIPI_RESIDENCIA:
+            case RESIDENT_MUNICIPI:
+            case NUMERO_CONVIVENTS:
+            case COMPROVACIO_CONVIVENTS:
+            case TITULAR_PROPI:
+            case CONVIVENTS_PROPI:
+            case TITULAR_PDF:
+            case CONVIVENTS_PDF:
+            case TITULAR_IDESCAT:
+            case CERCA_TITULAR:
+            default:
+                return new Object[]{};
+        }
     }
 
     private PeticionDatosConvivientes buildPeticionDatosConvivientes() {

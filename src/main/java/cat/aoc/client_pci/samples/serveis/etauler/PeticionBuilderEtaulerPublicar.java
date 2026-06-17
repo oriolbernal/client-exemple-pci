@@ -5,9 +5,12 @@ import generated.serveis.etauler.*;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
-interface PeticionBuilderEtaulerPublicar {
+final class PeticionBuilderEtaulerPublicar {
 
-    static PeticioPublicarEdicte buildPeticioPublicarEdicte() {
+    private PeticionBuilderEtaulerPublicar() {
+    }
+
+    public static PeticioPublicarEdicte buildPeticioPublicarEdicte() {
         PeticioPublicarEdicte peticio = new PeticioPublicarEdicte();
         TEdicte edicte = new TEdicte();
         edicte.setIdEdicte("1713710007_502");

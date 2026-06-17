@@ -1,14 +1,14 @@
 plugins {
     id 'java-library'
-    id 'org.springframework.boot' version '3.0.2'
+    id 'org.springframework.boot' version '2.7.18'
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
 group = 'cat.aoc.client_pci'
 version = 'BETA-1.0.0'
 
-sourceCompatibility = '17'
-targetCompatibility = '17'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 def projectEncoding = 'UTF-8'
 
 repositories {
@@ -22,15 +22,18 @@ configurations {
 }
 
 dependencies {
-    implementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: '3.0.1' // JAXB API
-    implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '3.0.1' // JAXB reference implementation (curiously with com.sun coordinates)
-    implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '3.0.1'
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1' // JAXB API (javax)
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.8' // JAXB reference implementation
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
+    implementation group: 'com.sun.activation', name: 'javax.activation', version: '1.2.0' // javax.activation (removed from JDK 11+)
 
     // necessary for generating JAVA classes with 'jaxb' gradle task
     jaxb(
-            'com.sun.xml.bind:jaxb-impl:3.0.1', // JAXB Impl
-            'com.sun.xml.bind:jaxb-xjc:3.0.1', // XJC tools
-            'jakarta.xml.bind:jakarta.xml.bind-api:3.0.1',
+            'com.sun.xml.bind:jaxb-xjc:2.3.8', // XJC tools
+            'com.sun.xml.bind:jaxb-impl:2.3.8', // JAXB Impl
+            'com.sun.xml.bind:jaxb-core:2.3.0.1',
+            'javax.xml.bind:jaxb-api:2.3.1',
+            'com.sun.activation:javax.activation:1.2.0',
     )
 
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
@@ -38,8 +41,8 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpclient:4.5.14'
 
     // Lombok
-    compileOnly('org.projectlombok:lombok:1.18.22')
-    annotationProcessor('org.projectlombok:lombok:1.18.22')
+    compileOnly('org.projectlombok:lombok:1.18.30')
+    annotationProcessor('org.projectlombok:lombok:1.18.30')
 
     // Testing dependencies
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.1'
@@ -112,6 +115,14 @@ def jaxb = tasks.register("jaxb") {
 
 compileJava {options.encoding = projectEncoding}
 compileJava.dependsOn jaxb
+
+// Enforce true Java 8 (1.8) API compatibility when building with a newer JDK
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = projectEncoding
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.release = 8
+    }
+}
 
 tasks.named('jar') {
     manifest {

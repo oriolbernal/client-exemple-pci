@@ -16,14 +16,17 @@ public class PeticionBuilderNotaris extends PeticionBuilderFromProperties<Operac
 
     @Override
     protected Object[] getDatosEspecificos(OperacioNotaris operacio) {
-        return switch (operacio) {
-            case SUBSISTENCIA_ADMINISTRADORS -> new Object[]{
-                    buildPeticioConsultaSubsistenciaAdministradors()
-            };
-            case    SUBSISTENCIA_PODERS,
-                    COPIA_SIMPLE,
-                    CONSULTA_NOTARIS -> new Object[]{};
-        };
+        switch (operacio) {
+            case SUBSISTENCIA_ADMINISTRADORS:
+                return new Object[]{
+                        buildPeticioConsultaSubsistenciaAdministradors()
+                };
+            case SUBSISTENCIA_PODERS:
+            case COPIA_SIMPLE:
+            case CONSULTA_NOTARIS:
+            default:
+                return new Object[]{};
+        }
     }
 
     private PeticioConsultaSubsistenciaAdministradors buildPeticioConsultaSubsistenciaAdministradors() {

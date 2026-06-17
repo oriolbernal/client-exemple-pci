@@ -14,14 +14,18 @@ public class PeticionBuilderPadroHistoric extends PeticionBuilderFromProperties<
 
     @Override
     protected Object[] getDatosEspecificos(OperacioPadroHistoric operacio) {
-        return switch (operacio) {
-            case TITULAR_HISTORIC -> new Object[]{
-                    buildPeticionDatosTitularHistorico()
-            };
-            case CONVIVENTS_HISTORIC -> new Object[]{
-                    buildPeticionDatosConvivientesHistorico()
-            };
-        };
+        switch (operacio) {
+            case TITULAR_HISTORIC:
+                return new Object[]{
+                        buildPeticionDatosTitularHistorico()
+                };
+            case CONVIVENTS_HISTORIC:
+                return new Object[]{
+                        buildPeticionDatosConvivientesHistorico()
+                };
+            default:
+                return null;
+        }
     }
 
     private PeticionDatosTitularHistorico buildPeticionDatosTitularHistorico() {

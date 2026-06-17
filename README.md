@@ -15,8 +15,11 @@ https://consorciaoc.github.io/
 
 ## Requisits
 ### Java
-Per poder compilar i utilitzar el codi serà necessari utilitzar la JDK 17 (o superior) de java.
-- jdk17: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+Per poder compilar i utilitzar el codi serà necessari utilitzar la JDK 1.8 (Java 8) o superior.
+- jdk8: https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html
+
+> El projecte està configurat per generar bytecode compatible amb Java 1.8 (`sourceCompatibility`/`targetCompatibility = '1.8'`).
+> Si es compila amb una JDK 9 o superior, s'utilitza l'opció `--release 8` per garantir la compatibilitat real amb l'API de Java 8.
 ### Gradle
 El projecte incorpora un wrapper de gradle (`gradle/wrapper`) i uns fitxers executables
 (`./gradlew`) per poder fer servir el gestor sense necessitat de tenir-lo instal·lat.

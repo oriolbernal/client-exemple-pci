@@ -24,12 +24,16 @@ public class PeticionBuilderInss extends PeticionBuilderFromProperties<OperacioI
 
     @Override
     protected Object[] getDatosEspecificos(OperacioInss operacio) {
-        return switch (operacio) {
-            case PRESTACIONS -> new Object[]{};
-            case PRESTACIONS_HISTORIC -> new Object[]{
-                    buildPeticioConsultaPrestacionsHistoric()
-            };
-        };
+        switch (operacio) {
+            case PRESTACIONS:
+                return new Object[]{};
+            case PRESTACIONS_HISTORIC:
+                return new Object[]{
+                        buildPeticioConsultaPrestacionsHistoric()
+                };
+            default:
+                return null;
+        }
     }
 
     private static Titular getTitular() {

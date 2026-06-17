@@ -23,14 +23,18 @@ public class PeticionBuilderDgp extends PeticionBuilderFromProperties<OperacioDg
 
     @Override
     protected Object[] getDatosEspecificos(OperacioDgp operacio) {
-        return switch (operacio) {
-            case IDENTITAT_DADES -> new Object[]{
-                    buildPeticioConsultaDadesIdentitat()
-            };
-            case IDENTITAT_VERIFICACIO -> new Object[]{
-                    buildPeticioVerificacioDadesIdentitat()
-            };
-        };
+        switch (operacio) {
+            case IDENTITAT_DADES:
+                return new Object[]{
+                        buildPeticioConsultaDadesIdentitat()
+                };
+            case IDENTITAT_VERIFICACIO:
+                return new Object[]{
+                        buildPeticioVerificacioDadesIdentitat()
+                };
+            default:
+                return null;
+        }
     }
 
     private static Titular getTitular() {

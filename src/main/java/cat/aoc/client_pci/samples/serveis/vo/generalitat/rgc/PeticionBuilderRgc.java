@@ -12,12 +12,15 @@ public class PeticionBuilderRgc extends PeticionBuilderFromProperties<OperacioRg
 
     @Override
     protected Object[] getDatosEspecificos(OperacioRgc operacio) {
-        return switch (operacio) {
-            case RGC_CONSULTA -> new Object[]{
-                    buildPeticioConsultaPrestacions()
-            };
-            case RGC_CONSULTA_HISTORIC -> new Object[]{};
-        };
+        switch (operacio) {
+            case RGC_CONSULTA:
+                return new Object[]{
+                        buildPeticioConsultaPrestacions()
+                };
+            case RGC_CONSULTA_HISTORIC:
+            default:
+                return new Object[]{};
+        }
     }
 
     private PeticioConsultaPrestacions buildPeticioConsultaPrestacions() {

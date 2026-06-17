@@ -61,12 +61,16 @@ public enum Serveis {
 
     public ClientPCI getClient(Entorn entorn, Frontal frontal, String keystorePath) throws IOException {
         Properties properties = PropertiesReader.load(keystorePath);
-        return switch (this) {
-            case PADRO -> new ProxyClientPadro(entorn, frontal, properties);
-            case CADASTRE -> new ProxyClientCadastre(entorn, frontal, properties);
-            case ENOTUM -> new ClientPCI(entorn, this.cluster, frontal, this.packages, properties, true);
-            default -> new ClientPCI(entorn, this.cluster, frontal, this.packages, properties);
-        };
+        switch (this) {
+            case PADRO:
+                return new ProxyClientPadro(entorn, frontal, properties);
+            case CADASTRE:
+                return new ProxyClientCadastre(entorn, frontal, properties);
+            case ENOTUM:
+                return new ClientPCI(entorn, this.cluster, frontal, this.packages, properties, true);
+            default:
+                return new ClientPCI(entorn, this.cluster, frontal, this.packages, properties);
+        }
     }
 
 }

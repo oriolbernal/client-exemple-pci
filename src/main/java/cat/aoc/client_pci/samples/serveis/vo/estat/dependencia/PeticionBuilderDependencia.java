@@ -11,9 +11,12 @@ public class PeticionBuilderDependencia extends PeticionBuilderFromProperties<Op
 
     @Override
     protected Object[] getDatosEspecificos(OperacioDependencia operacio) {
-        return switch (operacio) {
-            case GRAU_DEPENDENCIA -> new Object[]{};
-        };
+        switch (operacio) {
+            case GRAU_DEPENDENCIA:
+                return new Object[]{};
+            default:
+                return null;
+        }
     }
 
 }

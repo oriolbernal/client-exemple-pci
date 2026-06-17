@@ -6,8 +6,8 @@ import generated.pci.peticion.Fichero;
 import generated.pci.peticion.Ficheros;
 import generated.pci.peticion.Peticion;
 import generated.serveis.enotum.UsuariType;
-import jakarta.activation.DataHandler;
-import jakarta.activation.FileDataSource;
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 
 import java.util.Properties;
 
@@ -52,17 +52,24 @@ public class PeticionBuilderEnotum extends PeticionBuilderFromProperties<Operaci
     }
 
     private Object getDatoEspecifico(OperacioEnotum operacio) {
-        return switch (operacio) {
-            case CERCA -> buildPeticioCerca(buildUsuari());
-            case PROCESSAR_TRAMESA -> buildPeticioProcessarTramesa(buildUsuari());
-            case CONSULTA -> buildPeticioConsulta(buildUsuari());
-            case RESUM -> buildPeticioResum(buildUsuari());
-            case PARAULA_PAS -> buildPeticioParaulaPas(buildUsuari());
-            case ANULLACIO,
-                 EVIDENCIA,
-                 PRACTICAR,
-                 RECUPERAR_REPORT -> null;
-        };
+        switch (operacio) {
+            case CERCA:
+                return buildPeticioCerca(buildUsuari());
+            case PROCESSAR_TRAMESA:
+                return buildPeticioProcessarTramesa(buildUsuari());
+            case CONSULTA:
+                return buildPeticioConsulta(buildUsuari());
+            case RESUM:
+                return buildPeticioResum(buildUsuari());
+            case PARAULA_PAS:
+                return buildPeticioParaulaPas(buildUsuari());
+            case ANULLACIO:
+            case EVIDENCIA:
+            case PRACTICAR:
+            case RECUPERAR_REPORT:
+            default:
+                return null;
+        }
     }
 
     private UsuariType buildUsuari() {

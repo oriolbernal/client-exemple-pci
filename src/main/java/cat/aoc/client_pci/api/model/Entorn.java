@@ -11,11 +11,16 @@ public enum Entorn {
     }
 
     private String getHost() {
-        return switch (this) {
-            case DEV -> "serveis3-dev";
-            case PRE -> "serveis3-pre";
-            case PRO -> "serveis3";
-        };
+        switch (this) {
+            case DEV:
+                return "serveis3-dev";
+            case PRE:
+                return "serveis3-pre";
+            case PRO:
+                return "serveis3";
+            default:
+                throw new IllegalStateException("Entorn no definit: " + this);
+        }
     }
 
 }

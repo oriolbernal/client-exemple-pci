@@ -35,8 +35,8 @@ public class PeticionBuilderSir2 extends PeticionBuilderFromProperties<OperacioS
         fichero.setNombreFichero("sample.pdf");
         fichero.setId("1234");
         fichero.setVia("Salida");
-        jakarta.activation.DataSource ds = new jakarta.activation.FileDataSource("src\\main\\resources\\examples\\example.pdf");
-        fichero.setContenido(new jakarta.activation.DataHandler(ds));
+        javax.activation.DataSource ds = new javax.activation.FileDataSource("src\\main\\resources\\examples\\example.pdf");
+        fichero.setContenido(new javax.activation.DataHandler(ds));
         Ficheros ficheros = new Ficheros();
         ficheros.getFichero().add(fichero);
         return ficheros;
@@ -48,14 +48,21 @@ public class PeticionBuilderSir2 extends PeticionBuilderFromProperties<OperacioS
     }
 
     private Object getDatoEspecifico(OperacioSir2 operacio) {
-        return switch (operacio) {
-            case ENVIAR -> buildPeticioEnviamentAssentament();
-            case CONFIRMAR -> buildPeticioConfirmacioAssentament();
-            case REBUTJAR -> buildPeticioRebuigAssentament();
-            case REENVIAR -> buildPeticioReenviamentAssentament();
-            case CONSULTAR -> buildPeticioConsultaAssentament();
-            case SINCRONITZAR -> null;
-        };
+        switch (operacio) {
+            case ENVIAR:
+                return buildPeticioEnviamentAssentament();
+            case CONFIRMAR:
+                return buildPeticioConfirmacioAssentament();
+            case REBUTJAR:
+                return buildPeticioRebuigAssentament();
+            case REENVIAR:
+                return buildPeticioReenviamentAssentament();
+            case CONSULTAR:
+                return buildPeticioConsultaAssentament();
+            case SINCRONITZAR:
+            default:
+                return null;
+        }
     }
 
 }

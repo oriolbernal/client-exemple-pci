@@ -8,15 +8,19 @@ import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
 
-interface PeticionBuilderSir2Enviar {
-    static PeticioEnviamentAssentament buildPeticioEnviamentAssentament() {
+final class PeticionBuilderSir2Enviar {
+
+    private PeticionBuilderSir2Enviar() {
+    }
+
+    public static PeticioEnviamentAssentament buildPeticioEnviamentAssentament() {
         PeticioEnviamentAssentament peticio = new PeticioEnviamentAssentament();
         peticio.setIdEnviament("ID_SIR - " + System.currentTimeMillis());
         peticio.setEnviament(buildFicheroIntercambioSICRES3Xml());
         return peticio;
     }
 
-    static String buildFicheroIntercambioSICRES3Xml() {
+    public static String buildFicheroIntercambioSICRES3Xml() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPaths("generated.serveis.sir2");
         FicheroIntercambioSICRES3 sicres3 = buildFicheroIntercambioSICRES3();
@@ -26,7 +30,7 @@ interface PeticionBuilderSir2Enviar {
         return sw.toString();
     }
 
-    static FicheroIntercambioSICRES3 buildFicheroIntercambioSICRES3() {
+    public static FicheroIntercambioSICRES3 buildFicheroIntercambioSICRES3() {
         FicheroIntercambioSICRES3 sicres3 = new FicheroIntercambioSICRES3();
         sicres3.setDeOrigenORemitente(getDeOrigenORemitente());
         sicres3.setDeDestino(getDeDestino());

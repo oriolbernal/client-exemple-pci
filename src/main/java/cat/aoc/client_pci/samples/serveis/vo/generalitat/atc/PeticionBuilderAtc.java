@@ -21,9 +21,11 @@ public class PeticionBuilderAtc extends PeticionBuilderFromProperties<OperacioAt
 
     @Override
     protected Object[] getDatosEspecificos(OperacioAtc operacio) {
-        return switch (operacio) {
-            case ATC_INF_DEUTES_TMP -> new Object[]{};
-        };
+        switch (operacio) {
+            case ATC_INF_DEUTES_TMP:
+            default:
+                return new Object[]{};
+        }
     }
 
     private static Titular getTitular() {

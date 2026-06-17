@@ -32,11 +32,20 @@ public class PeticionBuilderEtauler extends PeticionBuilderFromProperties<Operac
     }
 
     private Object getDatoEspecifico(OperacioEtauler operacio) {
-        return switch (operacio) {
-            case CONSULTAR -> buildPeticioConsultarEstatEdicte();
-            case PUBLICAR -> buildPeticioPublicarEdicte();
-            case DADES, AMPLIAR_TERMINI, CANCELAR, DESPENJAR, SINCRONITZAR, DESCARREGAR_DOCUMENT -> null;
-        };
+        switch (operacio) {
+            case CONSULTAR:
+                return buildPeticioConsultarEstatEdicte();
+            case PUBLICAR:
+                return buildPeticioPublicarEdicte();
+            case DADES:
+            case AMPLIAR_TERMINI:
+            case CANCELAR:
+            case DESPENJAR:
+            case SINCRONITZAR:
+            case DESCARREGAR_DOCUMENT:
+            default:
+                return null;
+        }
     }
 
     private static Ficheros getFicheros() {
@@ -44,8 +53,8 @@ public class PeticionBuilderEtauler extends PeticionBuilderFromProperties<Operac
         fichero.setNombreFichero("sample.pdf");
         fichero.setId("1234");
         fichero.setVia("Salida");
-        jakarta.activation.DataSource ds = new jakarta.activation.FileDataSource("src\\main\\resources\\examples\\example.pdf");
-        fichero.setContenido(new jakarta.activation.DataHandler(ds));
+        javax.activation.DataSource ds = new javax.activation.FileDataSource("src\\main\\resources\\examples\\example.pdf");
+        fichero.setContenido(new javax.activation.DataHandler(ds));
         Ficheros ficheros = new Ficheros();
         ficheros.getFichero().add(fichero);
         return ficheros;

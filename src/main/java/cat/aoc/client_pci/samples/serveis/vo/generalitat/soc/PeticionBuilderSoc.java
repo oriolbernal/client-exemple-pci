@@ -11,12 +11,14 @@ public class PeticionBuilderSoc extends PeticionBuilderFromProperties<OperacioSo
 
     @Override
     protected Object[] getDatosEspecificos(OperacioSoc operacio) {
-        return switch (operacio) {
-            case SOC_CERT_INSCRIPCIO,
-                    SOC_CERT_ULTIMPERIODE,
-                    SOC_CERT_DADESPERSONALS,
-                    SOC_CERT_DONO -> new Object[]{};
-        };
+        switch (operacio) {
+            case SOC_CERT_INSCRIPCIO:
+            case SOC_CERT_ULTIMPERIODE:
+            case SOC_CERT_DADESPERSONALS:
+            case SOC_CERT_DONO:
+            default:
+                return new Object[]{};
+        }
     }
 
 }

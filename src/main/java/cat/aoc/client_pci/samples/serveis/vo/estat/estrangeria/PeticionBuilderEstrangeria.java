@@ -12,11 +12,14 @@ public class PeticionBuilderEstrangeria extends PeticionBuilderFromProperties<Op
 
     @Override
     protected Object[] getDatosEspecificos(OperacioEstrangeria operacio) {
-        return switch (operacio) {
-            case RESIDENCIA_LEGAL -> new Object[]{
-                    buildPeticioConsultaDadesResidenciaLegal()
-            };
-        };
+        switch (operacio) {
+            case RESIDENCIA_LEGAL:
+                return new Object[]{
+                        buildPeticioConsultaDadesResidenciaLegal()
+                };
+            default:
+                return null;
+        }
     }
 
     private PeticioConsultaDadesResidenciaLegal buildPeticioConsultaDadesResidenciaLegal() {

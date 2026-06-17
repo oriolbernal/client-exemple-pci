@@ -2,9 +2,12 @@ package cat.aoc.client_pci.samples.serveis.enotum;
 
 import generated.serveis.enotum.*;
 
-interface PeticionBuilderEnotumProcessarTramesa {
+final class PeticionBuilderEnotumProcessarTramesa {
 
-    static PeticioProcessarTramesa buildPeticioProcessarTramesa(UsuariType usuari) {
+    private PeticionBuilderEnotumProcessarTramesa() {
+    }
+
+    public static PeticioProcessarTramesa buildPeticioProcessarTramesa(UsuariType usuari) {
         PeticioProcessarTramesa peticio = new PeticioProcessarTramesa();
         peticio.setTramesa(getTramesa());
         peticio.setUsuari(usuari);

@@ -11,9 +11,12 @@ public class PeticionBuilderRpe extends PeticionBuilderFromProperties<OperacioRp
 
     @Override
     protected Object[] getDatosEspecificos(OperacioRpe operacio) {
-        return switch (operacio) {
-            case RPE_CONSULTA, RPE_VERIFICACIO -> new Object[]{};
-        };
+        switch (operacio) {
+            case RPE_CONSULTA:
+            case RPE_VERIFICACIO:
+            default:
+                return new Object[]{};
+        }
     }
 
 }

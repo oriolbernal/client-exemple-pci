@@ -21,12 +21,18 @@ public class PeticionBuilderEacat extends PeticionBuilderFromProperties<Operacio
     }
 
     private Object getDatoEspecifico(OperacioEacat operacio) {
-        return switch (operacio) {
-            case EACAT_USUARI -> buildPeticioConsultaUsuari();
-            case EACAT_SERVEI -> buildPeticioConsultaServei();
-            case EACAT_ENS -> buildPeticioConsultaEns();
-            case EACAT_TIPUS_ENS -> buildPeticioConsultaTipusEns();
-        };
+        switch (operacio) {
+            case EACAT_USUARI:
+                return buildPeticioConsultaUsuari();
+            case EACAT_SERVEI:
+                return buildPeticioConsultaServei();
+            case EACAT_ENS:
+                return buildPeticioConsultaEns();
+            case EACAT_TIPUS_ENS:
+                return buildPeticioConsultaTipusEns();
+            default:
+                return null;
+        }
     }
 
 }

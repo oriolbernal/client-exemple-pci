@@ -12,15 +12,18 @@ public class PeticionBuilderRegistreEntitats extends PeticionBuilderFromProperti
 
     @Override
     protected Object[] getDatosEspecificos(OperacioRegistreEntitats operacio) {
-        return switch (operacio) {
-            case ENTITAT_INSCRIPCIO -> new Object[]{
-                    buildPeticioBasicaConsulta()
-            };
-            case ENTITAT_DADES,
-                    ENTITAT_ESTATUTS,
-                    ENTITAT_ESCRIPTURES,
-                    ENTITAT_COMPTES -> new Object[]{};
-        };
+        switch (operacio) {
+            case ENTITAT_INSCRIPCIO:
+                return new Object[]{
+                        buildPeticioBasicaConsulta()
+                };
+            case ENTITAT_DADES:
+            case ENTITAT_ESTATUTS:
+            case ENTITAT_ESCRIPTURES:
+            case ENTITAT_COMPTES:
+            default:
+                return new Object[]{};
+        }
     }
 
     private PeticioBasicaConsulta buildPeticioBasicaConsulta() {

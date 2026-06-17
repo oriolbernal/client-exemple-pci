@@ -13,12 +13,15 @@ public class PeticionBuilderGrauDiscapacitat extends PeticionBuilderFromProperti
 
     @Override
     protected Object[] getDatosEspecificos(OperacioGrauDiscapacitat operacio) {
-        return switch (operacio) {
-            case GRAU_DISCAPACITAT_SIMPLE -> new Object[]{
-                    buildPeticioConsultaDiscapacitatSimple()
-            };
-            case GRAU_DISCAPACITAT_TOTAL -> new Object[]{};
-        };
+        switch (operacio) {
+            case GRAU_DISCAPACITAT_SIMPLE:
+                return new Object[]{
+                        buildPeticioConsultaDiscapacitatSimple()
+                };
+            case GRAU_DISCAPACITAT_TOTAL:
+            default:
+                return new Object[]{};
+        }
     }
 
     private PeticioConsultaDiscapacitatSimple buildPeticioConsultaDiscapacitatSimple() {

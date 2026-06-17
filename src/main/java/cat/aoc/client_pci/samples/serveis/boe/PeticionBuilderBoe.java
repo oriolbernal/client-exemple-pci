@@ -18,11 +18,16 @@ public class PeticionBuilderBoe extends PeticionBuilderFromProperties<OperacioBo
     }
 
     private Object getDatoEspecifico(OperacioBoe operacio) {
-        return switch (operacio) {
-            case PUBLICAR -> null;
-            case CONSULTAR -> buildPeticioEnviamentAnunci();
-            case ANULAR -> null;
-        };
+        switch (operacio) {
+            case PUBLICAR:
+                return null;
+            case CONSULTAR:
+                return buildPeticioEnviamentAnunci();
+            case ANULAR:
+                return null;
+            default:
+                return null;
+        }
     }
 
 }

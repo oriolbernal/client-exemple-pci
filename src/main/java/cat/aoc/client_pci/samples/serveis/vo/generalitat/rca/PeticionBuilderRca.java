@@ -12,12 +12,15 @@ public class PeticionBuilderRca extends PeticionBuilderFromProperties<OperacioRc
 
     @Override
     protected Object[] getDatosEspecificos(OperacioRca operacio) {
-        return switch (operacio) {
-            case RCA_VERIFICACIO -> new Object[]{
-                    buildPeticioVerificacioAssegurat()
-            };
-            case RCA_CONSULTA -> new Object[]{};
-        };
+        switch (operacio) {
+            case RCA_VERIFICACIO:
+                return new Object[]{
+                        buildPeticioVerificacioAssegurat()
+                };
+            case RCA_CONSULTA:
+            default:
+                return new Object[]{};
+        }
     }
 
     private PeticioVerificacioAssegurat buildPeticioVerificacioAssegurat() {

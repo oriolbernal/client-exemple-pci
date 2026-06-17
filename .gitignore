@@ -3,6 +3,9 @@
 *.war
 *.ear
 
+# JAXB generated sources (created by the 'jaxb' gradle task)
+/src/main/java/generated/
+
 ### IntelliJ IDEA ###
 .idea
 *.iws

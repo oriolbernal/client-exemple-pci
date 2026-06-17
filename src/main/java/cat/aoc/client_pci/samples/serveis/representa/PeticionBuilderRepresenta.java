@@ -18,19 +18,24 @@ public class PeticionBuilderRepresenta extends PeticionBuilderFromProperties<Ope
     }
 
     private Object getDatoEspecifico(OperacioRepresenta operacio) {
-        return switch (operacio) {
-            case CONSULTA_REPRESENTACIO -> buildConsultarRepresentacio();
-            case CONSULTA_REPRESENTACIONS, VALIDACIO,
-                    ALTA,
-                    MODIFICACIO,
-                    CONSULTA_CATALEG,
-                    CONSULTA_FAMILIES,
-                    CONSULTA_FAMILIA,
-                    CONSULTA_TRAMITS,
-                    CONSULTA_ADMINISTRACIO,
-                    CONSULTA_ADMINISTRACIONS,
-                    DESCARREGA -> null;
-        };
+        switch (operacio) {
+            case CONSULTA_REPRESENTACIO:
+                return buildConsultarRepresentacio();
+            case CONSULTA_REPRESENTACIONS:
+            case VALIDACIO:
+            case ALTA:
+            case MODIFICACIO:
+            case CONSULTA_CATALEG:
+            case CONSULTA_FAMILIES:
+            case CONSULTA_FAMILIA:
+            case CONSULTA_TRAMITS:
+            case CONSULTA_ADMINISTRACIO:
+            case CONSULTA_ADMINISTRACIONS:
+            case DESCARREGA:
+                return null;
+            default:
+                return null;
+        }
     }
 
 }

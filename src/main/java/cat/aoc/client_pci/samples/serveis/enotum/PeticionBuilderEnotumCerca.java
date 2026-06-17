@@ -5,9 +5,12 @@ import generated.serveis.enotum.PeticioCerca;
 import generated.serveis.enotum.SentitOrdenacioType;
 import generated.serveis.enotum.UsuariType;
 
-interface PeticionBuilderEnotumCerca {
+final class PeticionBuilderEnotumCerca {
 
-    static PeticioCerca buildPeticioCerca(UsuariType usuari) {
+    private PeticionBuilderEnotumCerca() {
+    }
+
+    public static PeticioCerca buildPeticioCerca(UsuariType usuari) {
         PeticioCerca peticio = new PeticioCerca();
         peticio.setDadesCerca(getDadesCerca());
         peticio.setUsuari(usuari);

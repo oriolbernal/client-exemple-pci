@@ -26,9 +26,13 @@ public class PeticionBuilderSctDev extends PeticionBuilderFromProperties<Operaci
     }
 
     private Object getDatoEspecifico(OperacioSctDev operacio) {
-        return switch (operacio) {
-            case CONSULTA_CREDENCIALS, CONSULTA_CREDENCIALS_LOT -> null;
-        };
+        switch (operacio) {
+            case CONSULTA_CREDENCIALS:
+            case CONSULTA_CREDENCIALS_LOT:
+                return null;
+            default:
+                return null;
+        }
     }
 
     private static Titular getTitular() {

@@ -15,14 +15,17 @@ public class PeticionBuilderCadastre extends PeticionBuilderFromProperties<Opera
 
     @Override
     protected Object[] getDatosEspecificos(OperacioCadastre operacio) {
-        return switch (operacio) {
-            case CERTIFICACIO_TITULARITAT -> new Object[]{
-                    buildPeticioCertificacioTitular()
-            };
-            case DADES_CADASTRALS,
-                    DESCRIPTIVA_GRAFICA,
-                    DOCUMENT_CSV -> new Object[]{};
-        };
+        switch (operacio) {
+            case CERTIFICACIO_TITULARITAT:
+                return new Object[]{
+                        buildPeticioCertificacioTitular()
+                };
+            case DADES_CADASTRALS:
+            case DESCRIPTIVA_GRAFICA:
+            case DOCUMENT_CSV:
+            default:
+                return new Object[]{};
+        }
     }
 
     private PeticioCertificacioTitular buildPeticioCertificacioTitular() {

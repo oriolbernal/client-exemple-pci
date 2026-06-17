@@ -18,19 +18,23 @@ public class PeticionBuilderOver extends PeticionBuilderFromProperties<OperacioO
     }
 
     private Object getDatoEspecifico(OperacioOver operacio) {
-        return switch (operacio) {
-            case OVER_DOCUMENTACIO -> buildPeticioDocumentacioTramit();
-            case OVER_FORMULARI,
-                    OVER_CONTEXT,
-                    OVER_TRAMITACIO,
-                    OVER_ACTUALITZACIO,
-                    OVER_CONSULTA,
-                    OVER_LLISTA_EXPEDIENTS,
-                    OVER_CONSULTA_EXPEDIENT,
-                    OVER_LLISTA_SERVEIS,
-                    OVER_LLISTA_TRAMITS,
-                    OVER_INTEGRACIO -> null;
-        };
+        switch (operacio) {
+            case OVER_DOCUMENTACIO:
+                return buildPeticioDocumentacioTramit();
+            case OVER_FORMULARI:
+            case OVER_CONTEXT:
+            case OVER_TRAMITACIO:
+            case OVER_ACTUALITZACIO:
+            case OVER_CONSULTA:
+            case OVER_LLISTA_EXPEDIENTS:
+            case OVER_CONSULTA_EXPEDIENT:
+            case OVER_LLISTA_SERVEIS:
+            case OVER_LLISTA_TRAMITS:
+            case OVER_INTEGRACIO:
+                return null;
+            default:
+                return null;
+        }
     }
 
 }

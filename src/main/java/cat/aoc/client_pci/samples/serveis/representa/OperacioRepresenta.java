@@ -23,10 +23,12 @@ public enum OperacioRepresenta implements Operacio {
 
     @Override
     public String getCodiModalitat() {
-        return switch (this) {
-            case CONSULTA_REPRESENTACIO -> "REPRESENTA_CONSULTA";
-            default -> this.name();
-        };
+        switch (this) {
+            case CONSULTA_REPRESENTACIO:
+                return "REPRESENTA_CONSULTA";
+            default:
+                return this.name();
+        }
     }
 
 }

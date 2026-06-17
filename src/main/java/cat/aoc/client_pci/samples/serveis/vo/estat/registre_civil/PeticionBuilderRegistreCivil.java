@@ -15,13 +15,16 @@ public class PeticionBuilderRegistreCivil extends PeticionBuilderFromProperties<
 
     @Override
     protected Object[] getDatosEspecificos(OperacioRegistreCivil operacio) {
-        return switch (operacio) {
-            case NAIXEMENT -> new Object[]{
-                    buildPeticioConsultaRegistreCivil()
-            };
-            case MATRIMONI,
-                    DEFUNCIO -> new Object[]{};
-        };
+        switch (operacio) {
+            case NAIXEMENT:
+                return new Object[]{
+                        buildPeticioConsultaRegistreCivil()
+                };
+            case MATRIMONI:
+            case DEFUNCIO:
+            default:
+                return new Object[]{};
+        }
     }
 
     private PeticioConsultaRegistreCivil buildPeticioConsultaRegistreCivil() {
